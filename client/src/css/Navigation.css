@@ -1,7 +1,236 @@
-nav {
-    background-color: rgba(0, 0, 0, 0.8);
-    width: 100vw;
-    padding-left: 50px;
-    padding-right: 50px;
-    padding-top: 20px;
+nav.nav-container,
+nav.nav-container * {
+  box-sizing: border-box;
+}
+
+/* container */
+nav.nav-container {
+  background-color: rgba(0, 0, 0, 0.85);
+  width: 100vw;
+  padding: 20px 50px;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Helvetica Neue", Arial;
+}
+/* TOP ROW */
+.nav-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav-top h1 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+/* Primary button base — burgundy default, hover to black with white border */
+.btn-primary,
+.btn-create,
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  background-color: rgb(115, 2, 12); /* base burgundy */
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 600;
+  border: 1px solid transparent;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 180ms ease;
+  white-space: nowrap;
+}
+
+/* Hover invert: black bg, white text, white border */
+.btn-primary:hover,
+.btn-create:hover,
+.btn-ghost:hover,
+.btn-primary:focus,
+.btn-create:focus,
+.btn-ghost:focus {
+  background-color: #000000;
+  color: #ffffff;
+  border-color: #ffffff;
+  outline: none;
+}
+
+/* top-right buttons container specifics so they won't shrink or wrap awkwardly */
+.nav-top-buttons {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.nav-top-buttons a {
+  padding: 8px 14px;
+  min-width: 90px;
+  flex-shrink: 0; /* prevents shrinking on small screens */
+  text-align: center;
+}
+
+/* BOTTOM ROW */
+.nav-bottom {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  flex-wrap: wrap; /* allow wrapping for small screens */
+}
+
+/* left side bottom controls */
+.nav-bottom-left {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Lower action buttons: consistent size and perfectly centered text */
+.btn-ghost {
+  background-color: #800020; /* burgundy */
+  color: white;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 0 16px; /* only horizontal padding */
+  min-width: 100px;
+  height: 40px;
+  display: flex; /* ensures perfect centering */
+  align-items: center; /* vertical centering */
+  justify-content: center; /* horizontal centering */
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  line-height: 1; /* eliminate extra vertical space */
+}
+
+/* Hover - invert colors */
+.btn-ghost:hover {
+  background-color: black;
+  color: white;
+  border-color: white;
+}
+
+/* convertible checkbox styling (slightly bigger) */
+.checkbox-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #fff;
+  font-weight: 500;
+}
+.checkbox-container input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: rgb(115, 2, 12);
+  border-radius: 3px;
+}
+
+.nav-input-group {
+  margin-left: auto;
+  display: flex;
+  align-items: center; /* keep vertical alignment */
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+/* refined input styling */
+.nav-input-group input[type="text"] {
+  padding: 7px 12px; /* balanced internal padding (was 2px) */
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: rgba(255, 255, 255, 0.02);
+  color: #fff;
+  min-width: 180px;
+  height: 46px; /* match CREATE button height directly */
+  font-size: 0.9rem;
+  line-height: normal; /* prevents browser-specific bumps */
+  display: flex;
+  align-items: center;
+  box-sizing: border-box; /* ensure borders/padding included in height */
+  margin: 0;
+  vertical-align: middle;
+}
+
+.nav-input-group input[type="text"]::placeholder {
+  color: rgba(255, 255, 255, 0.45);
+}
+
+/* create button matches primary in size/weight */
+.btn-create {
+  padding: 8px 14px;
+  border-radius: 8px;
+  background-color: rgb(115, 2, 12);
+  color: #fff;
+  border: 1px solid transparent;
+  text-transform: uppercase;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* defensive overrides to remove interfering global rules */
+nav.nav-container a,
+nav.nav-container button {
+  margin: 0 !important;
+  width: auto !important;
+}
+
+/* RESPONSIVE adjustments */
+
+/* medium screens — tighten padding */
+@media (max-width: 900px) {
+  nav.nav-container {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+  .nav-input-group input[type="text"] {
+    min-width: 140px;
+  }
+}
+
+/* small screens: elegant stacking */
+@media (max-width: 560px) {
+  .nav-bottom {
+    align-items: flex-start;
+    gap: 10px;
+  }
+  .nav-bottom-left {
+    width: 100%;
+    order: 1;
+  }
+
+  .nav-input-group {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end; /* input on left, create on right */
+    gap: 8px;
+    order: 2;
+    margin-top: 6px;
+  }
+
+  .nav-input-group input[type="text"] {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .btn-create {
+    white-space: nowrap;
+  }
+
+  /* extremely narrow: stack create below input */
+  @media (max-width: 360px) {
+    .nav-input-group {
+      flex-direction: column;
+      align-items: stretch;
+      gap: 8px;
+    }
+    .nav-input-group button {
+      width: 100%;
+    }
+  }
 }
